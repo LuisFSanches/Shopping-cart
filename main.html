@@ -4,9 +4,145 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">    <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
   <title>Document</title>
 </head>
 <body>
+    <div class="container">
+      <header>
+        <label for=""></label>
+        <div class="marca">
+          
+          <label for="">CASA DOS CELULARES</label>
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+          <div class="carrinho">
+            <button> <i class="fas fa-shopping-cart"></i></button>
+            <span class="quantidade" id="quantidade">0</span>
+          </div>
+          
+        
+         
+      </header>
+      <h1>Produtos</h1>
+      <div class="container-loja">
   
+        <div class="produtos">
+          <div class="produto-info" id="produto1">
+            <img src="./assets/iphone_10.png" alt="">
+              <p id="nome1" for="">Iphone 10</p>
+              <label id="preco1" for="">R$ 5000</label>
+              <button onClick="addToCart(produto1)">Adicionar Carrinho</button>
+          </div>
+
+          <div class="produto-info" id="produto2">
+            <img src="./assets/iphone_11.png" alt="">
+            <p id="nome2" for="">Iphone 11</p>
+            <label id="preco2" for="">R$ 5500</label>
+            <button onClick="addToCart(produto2)">Adicionar Carrinho</button>
+        </div>
+
+          <div class="produto-info" id="produto3">
+            <img src="./assets/lg_g5.png" alt="">
+            <p id="nome3" for="">LG G5</p>
+            <label id="preco3" for="">R$ 1100</label>
+            <button onClick="addToCart(produto3)">Adicionar Carrinho</button>
+        </div>
+
+        <div class="produto-info" id="produto4">
+          <img src="./assets/motorola_g8.png" alt="">
+          <p id="nome4" for="">Motorola G8</p>
+          <label id="preco4" for="">R$ 1300</label>
+          <button onClick="addToCart(produto4)">Adicionar Carrinho</button>
+      </div>
+
+        <div class="produto-info" id="produto5">
+          <img src="./assets/samsung_s10.png" alt="">
+          <p id="nome5" for="">Samsung S10</p>
+          <label id="preco5" for="">R$ 1400</label>
+          <button onClick="addToCart(produto5)">Adicionar Carrinho</button>
+      </div>
+
+      <div class="produto-info" id="produto6">
+        <img src="./assets/samsung_s9.png" alt="">
+        <p id="nome6" for="">Samsung S9</p>
+        <label id="preco6" for="">R$ 1100</label>
+        <button onClick="addToCart(produto6)">Adicionar Carrinho</button>
+    </div>
+
+    <div class="produto-info" id="produto7">
+      <img src="./assets/xiaomi_9.png" alt="">
+      <p id="nome7" for="">Xiaomi 9</p>
+      <label id="preco7" for="">R$ 1600</label>
+      <button onClick="addToCart(produto7)">Adicionar Carrinho</button>
+    </div>
+
+    <div class="produto-info" id="produto8">
+      <img src="./assets/xiomi_8.png" alt="">
+      <p id="nome8" for="">Xiaomi 8</p>
+      <label id="preco8" for="">R$ 1300</label>
+      <button onClick="addToCart(produto8)">Adicionar Carrinho</button>
+    </div>
+
+      </div>
+
+      <div class="carrinho-completo" id="carrinho-completo">
+        <div class="carrinho-header">
+          <button onClick="closeCart()"><i class="fas fa-times"></i></button>
+          <label for=""></label>
+        </div>
+        <h2>Seu Carrinho</h2>
+
+        <div class="produto-no-carrinho">
+          <img src="./assets/iphone_10.png" alt="">
+
+          <div class="descricao-produto-carrinho">
+            <h2>Iphone 10</h2>
+            <label for="">$88.99</label>
+            <button>Remover</button>
+          </div>
+          
+          <div class="alterar-quantidade">
+            <button><i class="fas fa-arrow-up"></i></button>
+           
+           <span>1</span>
+           <button><i class="fas fa-arrow-down"></i></button>
+           
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+      var produtos = []
+      var quantidade = document.getElementById('quantidade')
+      var carrinho = document.getElementById('carrinho-completo')
+
+      function addToCart(produto){
+        var checkProduto = produtos.includes(produto)
+        console.log(produtos.length)
+      
+        if(checkProduto === false){
+          produtos.push(produto)
+          quantidade.innerText  = produtos.length
+        }
+        
+        carrinho.className = "carrinho-completo-aberto"
+
+      }
+
+      function closeCart(){
+        carrinho.className="carrinho-completo"
+      }
+
+      
+
+    </script>
 </body>
 </html>
