@@ -148,6 +148,10 @@ header button i:hover {
   border: none;
   cursor: pointer;
 }
+.carrinho-body {
+  display: flex;
+  flex-direction: column;
+}
 .produto-no-carrinho {
   display: flex;
   align-items: center;

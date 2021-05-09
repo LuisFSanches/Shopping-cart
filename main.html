@@ -21,7 +21,7 @@
           <i class="fas fa-mobile-alt"></i>
         </div>
           <div class="carrinho">
-            <button> <i class="fas fa-shopping-cart"></i></button>
+            <button onclick="openCart()"> <i class="fas fa-shopping-cart"></i></button>
             <span class="quantidade" id="quantidade">0</span>
           </div>
           
@@ -34,58 +34,58 @@
         <div class="produtos">
           <div class="produto-info" id="produto1">
             <img src="./assets/iphone_10.png" alt="">
-              <p id="nome1" for="">Iphone 10</p>
-              <label id="preco1" for="">R$ 5000</label>
-              <button onClick="addToCart(produto1)">Adicionar Carrinho</button>
+              <p for="">Iphone 10</p>
+              <label for="">R$ 5000</label>
+              <button onClick="addToCart(produto1, './assets/iphone_10.png', 'Iphone10', 'R$ 5000')">Adicionar Carrinho</button>
           </div>
 
           <div class="produto-info" id="produto2">
             <img src="./assets/iphone_11.png" alt="">
-            <p id="nome2" for="">Iphone 11</p>
+            <p for="">Iphone 11</p>
             <label id="preco2" for="">R$ 5500</label>
-            <button onClick="addToCart(produto2)">Adicionar Carrinho</button>
+            <button onClick="addToCart(produto2, './assets/iphone_11.png', 'Iphone11', 'R$ 5500')">Adicionar Carrinho</button>
         </div>
 
           <div class="produto-info" id="produto3">
             <img src="./assets/lg_g5.png" alt="">
-            <p id="nome3" for="">LG G5</p>
-            <label id="preco3" for="">R$ 1100</label>
-            <button onClick="addToCart(produto3)">Adicionar Carrinho</button>
+            <p for="">LG G5</p>
+            <label for="">R$ 1100</label>
+            <button onClick="addToCart(produto3, './assets/lg_g5.png', 'LG G5', 'R$ 1100')">Adicionar Carrinho</button>
         </div>
 
         <div class="produto-info" id="produto4">
           <img src="./assets/motorola_g8.png" alt="">
-          <p id="nome4" for="">Motorola G8</p>
-          <label id="preco4" for="">R$ 1300</label>
-          <button onClick="addToCart(produto4)">Adicionar Carrinho</button>
+          <p for="">Motorola G8</p>
+          <label for="">R$ 1300</label>
+          <button onClick="addToCart(produto4, './assets/lg_g5.png', 'Motorola G8', 'R$ 1300')">Adicionar Carrinho</button>
       </div>
 
         <div class="produto-info" id="produto5">
           <img src="./assets/samsung_s10.png" alt="">
-          <p id="nome5" for="">Samsung S10</p>
-          <label id="preco5" for="">R$ 1400</label>
-          <button onClick="addToCart(produto5)">Adicionar Carrinho</button>
+          <p for="">Samsung S10</p>
+          <label for="">R$ 1400</label>
+          <button onClick="addToCart(produto5, './assets/samsung_s10.png', 'Samsung S10', 'R$ 1400')">Adicionar Carrinho</button>
       </div>
 
       <div class="produto-info" id="produto6">
         <img src="./assets/samsung_s9.png" alt="">
-        <p id="nome6" for="">Samsung S9</p>
-        <label id="preco6" for="">R$ 1100</label>
-        <button onClick="addToCart(produto6)">Adicionar Carrinho</button>
+        <p for="">Samsung S9</p>
+        <label for="">R$ 1100</label>
+        <button onClick="addToCart(produto6, './assets/samsung_s9.png', 'Samsung S9', 'R$ 1100')">Adicionar Carrinho</button>
     </div>
 
     <div class="produto-info" id="produto7">
       <img src="./assets/xiaomi_9.png" alt="">
-      <p id="nome7" for="">Xiaomi 9</p>
-      <label id="preco7" for="">R$ 1600</label>
-      <button onClick="addToCart(produto7)">Adicionar Carrinho</button>
+      <p for="">Xiaomi 9</p>
+      <label for="">R$ 1600</label>
+      <button onClick="addToCart(produto7, './assets/xiaomi_9.png', 'Xiaomi 9', 'R$ 1600')">Adicionar Carrinho</button>
     </div>
 
     <div class="produto-info" id="produto8">
       <img src="./assets/xiomi_8.png" alt="">
-      <p id="nome8" for="">Xiaomi 8</p>
-      <label id="preco8" for="">R$ 1300</label>
-      <button onClick="addToCart(produto8)">Adicionar Carrinho</button>
+      <p for="">Xiaomi 8</p>
+      <label for="">R$ 1300</label>
+      <button onClick="addToCart(produto8, './assets/xiomi_8.png', 'Xiaomi 8', 'R$ 1300')">Adicionar Carrinho</button>
     </div>
 
       </div>
@@ -96,52 +96,164 @@
           <label for=""></label>
         </div>
         <h2>Seu Carrinho</h2>
-
-        <div class="produto-no-carrinho">
-          <img src="./assets/iphone_10.png" alt="">
-
-          <div class="descricao-produto-carrinho">
-            <h2>Iphone 10</h2>
-            <label for="">$88.99</label>
-            <button>Remover</button>
-          </div>
-          
-          <div class="alterar-quantidade">
-            <button><i class="fas fa-arrow-up"></i></button>
-           
-           <span>1</span>
-           <button><i class="fas fa-arrow-down"></i></button>
-           
-          </div>
+        <div class="carrinho-body" id="carrinho-body">
 
         </div>
+
+        <div class="total">
+          <h2 id="preco"> </h2>
+        </div>
+       
+
       </div>
     </div>
   </div>
 
     <script>
       var produtos = []
+      var preco_final = 0
       var quantidade = document.getElementById('quantidade')
       var carrinho = document.getElementById('carrinho-completo')
+      var carrinho_itens = document.getElementById('carrinho-body')
+      var valor_dos_produtos = document.getElementById('preco')
+    
 
-      function addToCart(produto){
+      function removerProduto(produto,preco){
+        const index = produtos.indexOf(produto)
+        if(index > -1){
+          produtos.splice(index,1)
+          quantidade.innerText  = produtos.length
+          novo_preco=preco_final-preco
+          valor_dos_produtos.innerText = novo_preco
+        }
+      }
+
+      function implementarDivProduto(produto, imagem,nome,preco){
+     
+         //Criando div do produto
+         var div_produto = document.createElement('div')
+          div_produto.className = "produto-no-carrinho"
+
+        //Criando divs internas
+         var descricao_produto = document.createElement('div')
+         descricao_produto.className = "descricao-produto-carrinho"
+
+         var div_quantidade= document.createElement('div')
+          div_quantidade.className="alterar-quantidade"
+
+         //Criando elementos do produto
+         var imagem_produto = document.createElement('img')
+         var nome_produto = document.createElement('h2')
+         var preco_produto = document.createElement('label')
+         var remover_produto = document.createElement('button')
+
+         var quantidade_produto = document.createElement('span')
+         var quantidade_atualizada = 1
+         var valor_produto= (Number(preco.split(' ')[1]))
+
+        //Setando valores para os produtos
+          imagem_produto.src = imagem
+          nome_produto.innerText = nome
+          preco_produto.innerText= preco
+          quantidade_produto.innerText = quantidade_atualizada
+
+          preco_final = Number(preco_final) + Number(valor_produto)
+          valor_dos_produtos.innerText = `O seu total é de: ${preco_final}`
+        
+
+        //Configurando Preço/Quantidade
+         var botao_aumentar_quantidade = document.createElement('button')
+         botao_aumentar_quantidade.onclick = function(){
+            quantidade_atualizada+=1
+
+            var preco_atualizado = (Number(preco.split(' ')[1])*(quantidade_atualizada))
+            preco_final+=valor_produto
+            valor_dos_produtos.innerText = `O seu total é de: ${preco_final}`
+          
+            quantidade_produto.innerText = quantidade_atualizada
+            return preco_atualizado
+
+           
+          }
+
+         var botao_diminuir_quantidade = document.createElement('button')
+         botao_diminuir_quantidade.onclick = function(){
+          var preco_atualizado = (Number(preco.split(' ')[1])*quantidade_atualizada)
+
+           if(quantidade_atualizada >1){
+            quantidade_atualizada-=1
+           
+            quantidade_produto.innerText = quantidade_atualizada
+
+            preco_final-=valor_produto
+            valor_dos_produtos.innerText = `O seu total é de: ${preco_final}`
+
+           }
+           return preco_atualizado
+           
+          }
+
+         var icone_aumentar_quantidade = document.createElement('i')
+         var icone_diminuir_quantidade = document.createElement('i')
+
+         //Configurando botão de remover
+          remover_produto.innerText = 'Remover'
+          remover_produto.onclick = function(){
+            carrinho_itens.removeChild(div_produto)
+            removerProduto(produto,preco_final)
+
+          }
+
+          //Configurando div de quantidade
+          icone_aumentar_quantidade.className = "fas fa-arrow-up"
+          icone_diminuir_quantidade.className = "fas fa-arrow-down"
+
+          botao_aumentar_quantidade.appendChild(icone_aumentar_quantidade)
+
+          botao_diminuir_quantidade.appendChild(icone_diminuir_quantidade)
+
+          div_quantidade.append(botao_aumentar_quantidade, quantidade_produto, botao_diminuir_quantidade)
+
+          //Configurando div de descrição do produto
+            descricao_produto.append(nome_produto, preco_produto, remover_produto)
+
+          //Adicionando os elementos na div do produto
+            div_produto.append(imagem_produto, descricao_produto,div_quantidade)
+
+          //Adicionar produto no carrinho
+          carrinho_itens.append(div_produto)
+
+      }
+
+
+      function addToCart(produto,imagem,nome,preco){
+        var produtoEscolhido = document.getElementById(produto.id)
         var checkProduto = produtos.includes(produto)
-        console.log(produtos.length)
+      
       
         if(checkProduto === false){
           produtos.push(produto)
           quantidade.innerText  = produtos.length
+          implementarDivProduto(produto,imagem, nome, preco)
         }
-        
+
+
         carrinho.className = "carrinho-completo-aberto"
+      
+
 
       }
+
 
       function closeCart(){
         carrinho.className="carrinho-completo"
       }
 
+      function openCart(){
+        carrinho.className = "carrinho-completo-aberto"
+      }
       
+  
 
     </script>
 </body>
