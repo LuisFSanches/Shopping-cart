@@ -18,11 +18,24 @@ span {
   font-family: "Roboto Condensed", sans-serif;
 }
 
-body {
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8c9aae;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #8c9aae;
+}
+​ body {
   width: 100%;
   background: #f8f3fa;
 }
 header {
+  max-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,10 +138,12 @@ header button i:hover {
   width: 330px;
   max-height: 100%;
   height: 100%;
+  overflow-y: scroll;
   position: absolute;
   background: #8c9aae;
   right: 0.5px;
   top: 0;
+  border-radius: 10px;
 }
 .carrinho-completo-aberto h2 {
   align-items: center;
@@ -216,4 +231,18 @@ header button i:hover {
 .alterar-quantidade i {
   color: #e43553;
   font-weight: bold;
+}
+.total h2 {
+  color: #ffd700;
+}
+@media only screen and (max-width: 770px) {
+  .produtos {
+    grid-template-columns: repeat(1, 4fr);
+  }
+  .carrinho-completo-aberto {
+    max-width: 100%;
+    position: fixed;
+    height: 100vh;
+    border-radius: 0;
+  }
 }
